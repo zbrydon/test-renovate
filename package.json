@@ -10,5 +10,5 @@
   "devDependencies": {
     "skuba": "12.0.0"
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.17.1"
 }
