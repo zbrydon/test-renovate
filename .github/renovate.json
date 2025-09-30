@@ -75,13 +75,14 @@
     {
       "groupName": "skuba v12.14.1 and pnpm v10.17",
       "matchPackageNames": ["skuba"],
-      "replacementVersion": "^12.14.1",
+      "allowedVersions": ">=12.14.1",
       "separateMajorMinor": false
     },
     {
       "groupName": "skuba v12.14.1 and pnpm v10.17",
       "matchPackageNames": ["pnpm"],
-      "replacementVersion": "/^10\\.17\\./",
+      "allowedVersions": ">=10.17.0",
+      "matchManagers": ["packageManager"],
       "separateMajorMinor": false
     }
   ],
