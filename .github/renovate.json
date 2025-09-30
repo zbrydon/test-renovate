@@ -73,15 +73,15 @@
       "matchCurrentVersion": ">=7.0.0 <7.1.0"
     },
     {
-      "groupName": "skuba v12.14.1 and pnpm v17",
+      "groupName": "skuba v12.14.1 and pnpm v10.17",
       "matchPackageNames": ["skuba"],
       "matchCurrentVersion": "^12.14.1",
       "separateMajorMinor": false
     },
     {
-      "groupName": "skuba v12.14.1 and pnpm v17",
+      "groupName": "skuba v12.14.1 and pnpm v10.17",
       "matchPackageNames": ["pnpm"],
-      "matchCurrentVersion": "/^17\\./",
+      "matchCurrentVersion": "/^10\\.17\\./",
       "separateMajorMinor": false
     }
   ],
