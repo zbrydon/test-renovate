@@ -73,13 +73,13 @@
       "matchCurrentVersion": ">=7.0.0 <7.1.0"
     },
     {
-      "groupName": "skuba v12.14.1 and pnpm v10.17",
+      "groupName": "skuba v12.4.1 and pnpm v10.17",
       "matchPackageNames": ["skuba"],
-      "allowedVersions": ">=12.14.1",
+      "allowedVersions": ">=12.4.1",
       "separateMajorMinor": false
     },
     {
-      "groupName": "skuba v12.14.1 and pnpm v10.17",
+      "groupName": "skuba v12.4.1 and pnpm v10.17",
       "matchPackageNames": ["pnpm"],
       "allowedVersions": ">=10.17.0",
       "matchManagers": ["packageManager"],
@@ -92,6 +92,7 @@
   ],
   "postUpdateOptions": ["yarnDedupeFewer", "pnpmDedupe"],
   "prCreation": "immediate",
+  "prHourlyLimit": 10,
   "semanticCommitScope": "",
   "semanticCommitType": "deps"
 }
