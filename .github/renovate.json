@@ -82,7 +82,6 @@
       "groupName": "skuba v12.14.1 and pnpm v10.17",
       "matchPackageNames": ["pnpm"],
       "replacementVersion": "/^10\\.17\\./",
-      "matchManagers": ["packageManager"],
       "separateMajorMinor": false
     }
   ],
@@ -92,6 +91,7 @@
   ],
   "postUpdateOptions": ["yarnDedupeFewer", "pnpmDedupe"],
   "prNotPendingHours": 1,
+  "prConcurrentLimit": 3,
   "prCreation": "immediate",
   "semanticCommitScope": "",
   "semanticCommitType": "deps"
