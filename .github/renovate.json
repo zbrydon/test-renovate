@@ -85,6 +85,7 @@
   ],
   "postUpdateOptions": ["yarnDedupeFewer", "pnpmDedupe"],
   "prNotPendingHours": 1,
+  "prCreation": "immediate",
   "semanticCommitScope": "",
   "semanticCommitType": "deps"
 }
