@@ -22,7 +22,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["(^|/)serverless(\\..*)?\\.ya?ml$"],
+      "managerFilePatterns": ["/(^|/)serverless(\\..*)?\\.ya?ml$/"],
       "matchStrings": [
         "frameworkVersion:\\s*['\"](?<currentValue>[^'\"]+)['\"]"
       ],
