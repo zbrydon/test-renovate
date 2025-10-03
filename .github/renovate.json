@@ -12,11 +12,23 @@
       "allowedVersions": ">=12.4.1 || >=10.17.0",
       "additionalBranchPrefix": "skuba-pnpm-",
       "separateMajorMinor": false
+    },
+    {
+      "groupName": "serverless",
+      "matchPackageNames": ["serverless"],
+      "separateMajorMinor": false
     }
   ],
-  "gitIgnoredAuthors": [
-    "34733141+seek-oss-ci@users.noreply.github.com",
-    "87109344+buildagencygitapitoken[bot]@users.noreply.github.com"
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["(^|/)serverless\\..*\\.ya?ml$"],
+      "matchStrings": [
+        "frameworkVersion:\\s*['\"](?<currentValue>[^'\"]+)['\"]"
+      ],
+      "depNameTemplate": "serverless",
+      "datasourceTemplate": "npm"
+    }
   ],
   "postUpdateOptions": ["yarnDedupeFewer", "pnpmDedupe"],
   "prCreation": "immediate",
