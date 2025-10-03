@@ -15,7 +15,7 @@
     },
     {
       "groupName": "serverless",
-      "matchManagers": ["npm", "regex"],
+      "matchManagers": ["npm", "custom.regex"],
       "matchPackageNames": ["serverless"],
       "separateMajorMinor": false
     }
