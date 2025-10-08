@@ -7,20 +7,20 @@
   },
   "packageRules": [
     {
+      "matchPackageNames": ["skuba"],
+      "allowedVersions": ">=12.4.1",
       "groupName": "skuba v12.14.1 and pnpm v10.17",
-      "matchPackageNames": ["skuba", "pnpm"],
+      "groupSlug": "skuba-pnpm-updates",
       "additionalBranchPrefix": "skuba-pnpm-",
-      "separateMajorMinor": false,
-      "packageRules": [
-        {
-          "matchPackageNames": ["skuba"],
-          "allowedVersions": ">=12.4.1"
-        },
-        {
-          "matchPackageNames": ["pnpm"],
-          "allowedVersions": ">=10.17.0"
-        }
-      ]
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackageNames": ["pnpm"],
+      "allowedVersions": ">=10.17.0",
+      "groupName": "skuba v12.14.1 and pnpm v10.17",
+      "groupSlug": "skuba-pnpm-updates",
+      "additionalBranchPrefix": "skuba-pnpm-",
+      "separateMajorMinor": false
     },
     {
       "groupName": "serverless",
