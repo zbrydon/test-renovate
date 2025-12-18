@@ -8,7 +8,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "serverless": "4.18.2"
+    "serverless": "4.18.2",
+    "dd-trace": "5.80.0"
   },
   "packageManager": "pnpm@10.15.0"
 }
