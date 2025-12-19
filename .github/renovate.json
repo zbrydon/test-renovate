@@ -37,8 +37,7 @@
       "matchManagers": ["npm"],
       "matchDepNames": ["dd-trace"],
       "matchCurrentVersion": "5.80.0",
-      "allowedVersions": "5.79.0",
-      "allowDowngrade": true
+      "allowedVersions": "5.79.0"
     }
   ],
   "customManagers": [
