@@ -15,7 +15,7 @@ ARG BASE_IMAGE
 
 # public.ecr.aws (registry kept in name)
 # Expected: .../public.ecr.aws/docker/library/busybox:stable
-FROM public.ecr.aws/docker/library/busybox:stable AS test-public-ecr
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/public.ecr.aws/docker/library/busybox:stable AS test-public-ecr
 
 # registry.k8s.io (registry kept in name)
 # Expected: .../registry.k8s.io/pause:3.10
