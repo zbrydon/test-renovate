@@ -19,7 +19,7 @@ FROM public.ecr.aws/docker/library/busybox:stable AS test-public-ecr
 
 # registry.k8s.io (registry kept in name)
 # Expected: .../registry.k8s.io/pause:3.10
-FROM registry.k8s.io/pause:3.10 AS test-registry-k8s
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/registry.k8s.io/pause:3.10 AS test-registry-k8s
 
 # quay.io (registry kept in name)
 # Expected: .../quay.io/jitesoft/alpine:latest
