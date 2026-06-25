@@ -23,7 +23,7 @@ FROM registry.k8s.io/pause:3.10 AS test-registry-k8s
 
 # quay.io (registry kept in name)
 # Expected: .../quay.io/jitesoft/alpine:latest
-FROM quay.io/jitesoft/alpine:latest AS test-quay
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/quay.io/jitesoft/alpine:latest AS test-quay
 
 # docker.io, explicitly qualified + namespaced
 # Expected: .../docker.io/amazon/aws-cli:latest
