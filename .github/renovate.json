@@ -8,8 +8,7 @@
   "packageRules": [
     {
       "description": "Route public.ecr.aws / registry.k8s.io / quay.io / docker.io images through the ECR pull-through cache",
-      "groupName": "ECR pull-through cache migration",
-      "matchManagers": ["dockerfile"],
+      "matchDatasources": ["docker"],
       "matchFileNames": ["**/Dockerfile*"],
       "matchPackageNames": [
         "public.ecr.aws/**",
@@ -20,20 +19,18 @@
       "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/{{{packageName}}}"
     },
     {
-      "description": "Route Docker Hub official (library) images through the ECR pull-through cache",
-      "groupName": "ECR pull-through cache migration",
-      "matchManagers": ["dockerfile"],
+      "description": "Route bare Docker Hub images through the ECR pull-through cache (adds docker.io, plus library/ for official images)",
+      "matchDatasources": ["docker"],
       "matchFileNames": ["**/Dockerfile*"],
-      "matchPackageNames": ["/^[^./]+$/"],
-      "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/{{{packageName}}}"
+      "matchPackageNames": ["/^[^./]+(\\/.+)?$/"],
+      "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{ replace '^([^/]+)$' 'library/$1' packageName }}"
     },
     {
-      "description": "Route namespaced Docker Hub images through the ECR pull-through cache",
-      "groupName": "ECR pull-through cache migration",
-      "matchManagers": ["dockerfile"],
+      "description": "Consolidate all ECR pull-through cache replacements into a single PR",
       "matchFileNames": ["**/Dockerfile*"],
-      "matchPackageNames": ["/^[^./]+\\/.+$/"],
-      "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{{packageName}}}"
+      "matchUpdateTypes": ["replacement"],
+      "groupName": "ECR pull-through cache migration",
+      "branchTopic": "docker-ecr-pull-through-cache"
     }
   ],
   "customManagers": [
