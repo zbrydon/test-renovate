@@ -55,7 +55,7 @@ FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox
 # Real build (kept last so `runtime` remains the default build target)
 # =============================================================================
 
-FROM public.ecr.aws/docker/library/node:22-alpine AS build
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/public.ecr.aws/docker/library/node:22-alpine AS build
 
 COPY . .
 
