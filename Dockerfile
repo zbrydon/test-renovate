@@ -31,7 +31,7 @@ FROM docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
 
 # docker.io, explicitly qualified official (library) image
 # Expected: .../docker.io/library/busybox:stable
-FROM docker.io/library/busybox:stable AS test-dockerio-library
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox:stable AS test-dockerio-library
 
 # Docker Hub bare official image (no registry, no namespace)
 # Expected: .../docker.io/library/node:22-alpine
