@@ -35,7 +35,7 @@ FROM docker.io/library/busybox:stable AS test-dockerio-library
 
 # Docker Hub bare official image (no registry, no namespace)
 # Expected: .../docker.io/library/node:22-alpine
-FROM node:22-alpine AS test-hub-official
+FROM node:26-alpine AS test-hub-official
 
 # Docker Hub bare namespaced image (no registry)
 # Expected: .../docker.io/amazon/aws-cli:latest
@@ -55,7 +55,7 @@ FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox
 # Real build (kept last so `runtime` remains the default build target)
 # =============================================================================
 
-FROM public.ecr.aws/docker/library/node:22-alpine AS build
+FROM public.ecr.aws/docker/library/node:26-alpine AS build
 
 COPY . .
 
