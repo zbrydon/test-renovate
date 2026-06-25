@@ -39,7 +39,7 @@ FROM node:22-alpine AS test-hub-official
 
 # Docker Hub bare namespaced image (no registry)
 # Expected: .../docker.io/amazon/aws-cli:latest
-FROM amazon/aws-cli:latest AS test-hub-namespaced
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/amazon/aws-cli:latest AS test-hub-namespaced
 
 # --- Control cases: should NOT be rewritten ----------------------------------
 
