@@ -27,7 +27,7 @@ FROM quay.io/jitesoft/alpine:latest AS test-quay
 
 # docker.io, explicitly qualified + namespaced
 # Expected: .../docker.io/amazon/aws-cli:latest
-FROM docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
 
 # docker.io, explicitly qualified official (library) image
 # Expected: .../docker.io/library/busybox:stable
