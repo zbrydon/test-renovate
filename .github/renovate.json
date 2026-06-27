@@ -37,7 +37,8 @@
       "groupName": "ECR pull-through cache migration",
       "branchTopic": "docker-ecr-pull-through-cache",
       "commitMessageAction": "",
-      "commitMessageExtra": ""
+      "commitMessageExtra": "",
+      "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}"
     }
   ],
   "customManagers": [
