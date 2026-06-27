@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "dd-trace": "5.80.0"
+    "dd-trace": "5.110.0"
   },
   "packageManager": "pnpm@10.26.0"
 }
