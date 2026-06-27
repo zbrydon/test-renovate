@@ -35,7 +35,9 @@
       "matchFileNames": ["**/Dockerfile*"],
       "matchUpdateTypes": ["replacement"],
       "groupName": "ECR pull-through cache migration",
-      "branchTopic": "docker-ecr-pull-through-cache"
+      "branchTopic": "docker-ecr-pull-through-cache",
+      "commitMessageAction": "",
+      "commitMessageExtra": ""
     }
   ],
   "customManagers": [
