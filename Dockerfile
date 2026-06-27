@@ -1,4 +1,5 @@
 ARG BASE_IMAGE
+ARG ECR_REGISTRY_PREFIX
 
 # =============================================================================
 # Renovate ECR pull-through cache test cases
@@ -33,6 +34,11 @@ FROM docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
 # Expected: .../docker.io/library/busybox:stable
 FROM docker.io/library/busybox:stable AS test-dockerio-library
 
+# docker.io, explicitly qualified official image WITHOUT the library/ namespace
+# (library/ must be injected even though the registry was already present)
+# Expected: .../docker.io/library/busybox:stable
+FROM docker.io/busybox:stable AS test-dockerio-official-bare
+
 # Docker Hub bare official image (no registry, no namespace)
 # Expected: .../docker.io/library/node:22-alpine
 FROM node:22-alpine AS test-hub-official
@@ -47,9 +53,17 @@ FROM amazon/aws-cli:latest AS test-hub-namespaced
 # Expected: unchanged
 FROM gcr.io/distroless/static-debian12:latest AS test-gcr-untouched
 
-# Already routed through ECR — must NOT be double-prefixed
+# Already routed through ECR (docker.io path) — must NOT be double-prefixed
 # Expected: unchanged
 FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox:stable AS test-already-ecr
+
+# Already routed through ECR (non-docker.io path) — must NOT be double-prefixed
+# Expected: unchanged
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/public.ecr.aws/docker/library/busybox:stable AS test-already-ecr-public
+
+# Already routed via the ECR_REGISTRY_PREFIX build arg — must NOT be rewritten
+# Expected: unchanged
+FROM ${ECR_REGISTRY_PREFIX}public.ecr.aws/docker/library/alpine:latest AS test-ecr-prefix-arg
 
 # =============================================================================
 # Real build (kept last so `runtime` remains the default build target)
