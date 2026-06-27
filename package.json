@@ -10,5 +10,5 @@
   "devDependencies": {
     "dd-trace": "5.80.0"
   },
-  "packageManager": "pnpm@10.26.0"
+  "packageManager": "pnpm@11.9.0"
 }
