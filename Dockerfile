@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-ARG ECR_REGISTRY_PREFIX
+ARG ECR_REGISTRY_PREFIX=
 
 # =============================================================================
 # Renovate ECR pull-through cache test cases
