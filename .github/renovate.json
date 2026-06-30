@@ -36,7 +36,12 @@
       "branchTopic": "docker-ecr-pull-through-cache",
       "commitMessageAction": "",
       "commitMessageExtra": "",
-      "prBodyNotes": "---\n\n📖 See the [ECR pull-through cache runbook](https://example.com/docs/ecr-pull-through-cache) for context on these replacements."
+      "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}",
+      "prFooter": "---\n\n📖 See the [ECR pull-through cache runbook](https://example.com/docs/ecr-pull-through-cache) for context on these replacements.",
+      "schedule": ["at any time"],
+      "minimumReleaseAgeBehaviour": "timestamp-optional",
+      "prConcurrentLimit": 0,
+      "prPriority": 100
     },
     {
       "description": "Do not apply ECR pull-through cache replacements to FROM lines already routed via the ${ECR_REGISTRY_PREFIX} build arg; this prevents duplicating the registry prefix. Version (tag) updates are unaffected.",
