@@ -16,36 +16,36 @@ ARG ECR_REGISTRY_PREFIX=
 
 # public.ecr.aws (registry kept in name)
 # Expected: .../public.ecr.aws/docker/library/busybox:stable
-FROM public.ecr.aws/docker/library/busybox:stable AS test-public-ecr
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/public.ecr.aws/docker/library/busybox:stable AS test-public-ecr
 
 # registry.k8s.io (registry kept in name)
 # Expected: .../registry.k8s.io/pause:3.10
-FROM registry.k8s.io/pause:3.10 AS test-registry-k8s
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/registry.k8s.io/pause:3.10 AS test-registry-k8s
 
 # quay.io (registry kept in name)
 # Expected: .../quay.io/jitesoft/alpine:latest
-FROM quay.io/jitesoft/alpine:latest AS test-quay
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/quay.io/jitesoft/alpine:latest AS test-quay
 
 # docker.io, explicitly qualified + namespaced
 # Expected: .../docker.io/amazon/aws-cli:latest
-FROM docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/amazon/aws-cli:latest AS test-dockerio-namespaced
 
 # docker.io, explicitly qualified official (library) image
 # Expected: .../docker.io/library/busybox:stable
-FROM docker.io/library/busybox:stable AS test-dockerio-library
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox:stable AS test-dockerio-library
 
 # docker.io, explicitly qualified official image WITHOUT the library/ namespace
 # (library/ must be injected even though the registry was already present)
 # Expected: .../docker.io/library/busybox:stable
-FROM docker.io/busybox:stable AS test-dockerio-official-bare
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/busybox:stable AS test-dockerio-official-bare
 
 # Docker Hub bare official image (no registry, no namespace)
 # Expected: .../docker.io/library/node:22-alpine
-FROM node:22-alpine AS test-hub-official
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/node:22-alpine AS test-hub-official
 
 # Docker Hub bare namespaced image (no registry)
 # Expected: .../docker.io/amazon/aws-cli:latest
-FROM amazon/aws-cli:latest AS test-hub-namespaced
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/amazon/aws-cli:latest AS test-hub-namespaced
 
 # --- Control cases: should NOT be rewritten ----------------------------------
 
@@ -69,7 +69,7 @@ FROM ${ECR_REGISTRY_PREFIX}public.ecr.aws/docker/library/alpine:latest AS test-e
 # Real build (kept last so `runtime` remains the default build target)
 # =============================================================================
 
-FROM public.ecr.aws/docker/library/node:22-alpine AS build
+FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/public.ecr.aws/docker/library/node:22-alpine AS build
 
 COPY . .
 
