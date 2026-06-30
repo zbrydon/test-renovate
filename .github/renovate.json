@@ -37,7 +37,7 @@
       "commitMessageAction": "",
       "commitMessageExtra": "",
       "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}",
-      "prFooter": "---\n\n📖 See the [ECR pull-through cache runbook](https://example.com/docs/ecr-pull-through-cache) for context on these replacements.",
+      "prFooter": "📖 See the [ECR pull-through cache runbook](https://example.com/docs/ecr-pull-through-cache) for context on these replacements.",
       "schedule": ["at any time"],
       "minimumReleaseAgeBehaviour": "timestamp-optional",
       "prConcurrentLimit": 0,
