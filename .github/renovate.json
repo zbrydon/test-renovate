@@ -14,8 +14,7 @@
         "public.ecr.aws/**",
         "registry.k8s.io/**",
         "quay.io/**",
-        "!111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/**",
-        "!/ECR_REGISTRY_PREFIX/"
+        "!111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/**"
       ],
       "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/{{{packageName}}}"
     },
@@ -25,8 +24,7 @@
       "matchFileNames": ["**/Dockerfile*"],
       "matchPackageNames": [
         "/^(?:docker\\.io\\/)?[^./]+(?:\\/.+)?$/",
-        "!111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/**",
-        "!/ECR_REGISTRY_PREFIX/"
+        "!111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/**"
       ],
       "replacementNameTemplate": "111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{ replace '^([^/]+)$' 'library/$1' (replace '^docker\\.io/' '' packageName) }}"
     },
@@ -39,6 +37,14 @@
       "commitMessageAction": "",
       "commitMessageExtra": "",
       "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}"
+    },
+    {
+      "description": "Do not apply ECR pull-through cache replacements to FROM lines already routed via the ${ECR_REGISTRY_PREFIX} build arg; this prevents duplicating the registry prefix. Version (tag) updates are unaffected.",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["**/Dockerfile*"],
+      "matchUpdateTypes": ["replacement"],
+      "matchJsonata": ["$contains(replaceString, '${ECR_REGISTRY_PREFIX}')"],
+      "enabled": false
     }
   ],
   "customManagers": [
