@@ -36,7 +36,6 @@
       "branchTopic": "docker-ecr-pull-through-cache",
       "commitMessageAction": "",
       "commitMessageExtra": "",
-      "prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{changelogs}}}{{{configDescription}}}{{{controls}}}{{{footer}}}",
       "prBodyNotes": "---\n\n📖 See the [ECR pull-through cache runbook](https://example.com/docs/ecr-pull-through-cache) for context on these replacements."
     },
     {
