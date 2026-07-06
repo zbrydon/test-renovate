@@ -4,41 +4,56 @@
   "configMigration": true,
   "customManagers": [
     {
-      "description": "ECR pull-through cache: prepend the ECR prefix to registry-qualified images (public.ecr.aws / registry.k8s.io / quay.io and docker.io/<namespace>/<image>), keeping the upstream path. Versions are looked up upstream.",
+      "description": "ECR pull-through cache: prepend the ECR prefix to registry-qualified images (public.ecr.aws / registry.k8s.io / quay.io and docker.io/<namespace>/<image>), keeping the upstream path. Versions and digests are looked up upstream.",
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)Dockerfile[^/]*$/"],
       "matchStrings": [
-        "FROM\\s+(?<depName>(?:public\\.ecr\\.aws|registry\\.k8s\\.io|quay\\.io)/[^\\s:@]+):(?<currentValue>[^\\s]+)",
-        "FROM\\s+(?<depName>docker\\.io/[^\\s:@]+/[^\\s:@]+):(?<currentValue>[^\\s]+)"
+        "FROM\\s+(?<depName>(?:public\\.ecr\\.aws|registry\\.k8s\\.io|quay\\.io)/[^\\s:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?",
+        "FROM\\s+(?<depName>docker\\.io/[^\\s:@]+/[^\\s:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
       ],
       "datasourceTemplate": "docker",
-      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/{{{depName}}}:{{{newValue}}}"
+      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}"
     },
     {
       "description": "ECR pull-through cache: prepend the ECR prefix to Docker Hub official images, injecting docker.io/library/. Matches explicitly-qualified official images (docker.io/<image>) and bare official images (<image>).",
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)Dockerfile[^/]*$/"],
       "matchStrings": [
-        "FROM\\s+docker\\.io/(?<depName>[^\\s/:@]+):(?<currentValue>[^\\s]+)",
-        "FROM\\s+(?<depName>[^\\s/:@.${}]+):(?<currentValue>[^\\s]+)"
+        "FROM\\s+docker\\.io/(?<depName>[^\\s/:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?",
+        "FROM\\s+(?<depName>[^\\s/:@.${}]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
       ],
       "datasourceTemplate": "docker",
       "packageNameTemplate": "docker.io/library/{{{depName}}}",
-      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/{{{depName}}}:{{{newValue}}}"
+      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/library/{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}"
     },
     {
       "description": "ECR pull-through cache: prepend the ECR prefix to bare Docker Hub namespaced images (<namespace>/<image>), injecting docker.io/.",
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)Dockerfile[^/]*$/"],
       "matchStrings": [
-        "FROM\\s+(?<depName>[^\\s/:@.${}]+/[^\\s:@]+):(?<currentValue>[^\\s]+)"
+        "FROM\\s+(?<depName>[^\\s/:@.${}]+/[^\\s:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
       ],
       "datasourceTemplate": "docker",
       "packageNameTemplate": "docker.io/{{{depName}}}",
-      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{{depName}}}:{{{newValue}}}"
+      "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "The custom regex managers rewrite these images to the ECR pull-through prefix. Disable the built-in dockerfile manager for them so it doesn't create duplicate, conflicting updates that fail autoreplace. This allowlist matches the registry-qualified targets (public.ecr.aws / registry.k8s.io / quay.io / docker.io) plus bare Docker Hub images (official '<image>' and namespaced '<namespace>/<image>', i.e. a first path segment with no '.' or ':'). Everything else (e.g. gcr.io, already-ECR-prefixed images) is left to the dockerfile manager.",
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": [
+        "public.ecr.aws/**",
+        "registry.k8s.io/**",
+        "quay.io/**",
+        "docker.io/**",
+        "/^[^./:]+(/[^:]+)?$/"
+      ],
+      "enabled": false
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
+  "pinDigests": true,
   "prCreation": "immediate",
   "prHourlyLimit": 10,
   "semanticCommitScope": "",
