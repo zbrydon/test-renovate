@@ -51,7 +51,7 @@ FROM amazon/aws-cli:latest AS test-hub-namespaced
 
 # gcr.io is not in the list — leave untouched
 # Expected: unchanged
-FROM gcr.io/distroless/static-debian12:latest AS test-gcr-untouched
+FROM gcr.io/distroless/static-debian12:latest@sha256:9c346e4be81b5ca7ff31a0d89eaeade58b0f95cfd3baed1f36083ddb47ca3160 AS test-gcr-untouched
 
 # Already routed through ECR (docker.io path) — must NOT be double-prefixed
 # Expected: unchanged
