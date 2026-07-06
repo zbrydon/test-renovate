@@ -41,7 +41,7 @@ FROM docker.io/busybox:stable AS test-dockerio-official-bare
 
 # Docker Hub bare official image (no registry, no namespace)
 # Expected: .../docker.io/library/node:22-alpine
-FROM node:22-alpine AS test-hub-official
+FROM node:26-alpine AS test-hub-official
 
 # Docker Hub bare namespaced image (no registry)
 # Expected: .../docker.io/amazon/aws-cli:latest
