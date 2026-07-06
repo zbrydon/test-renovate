@@ -53,7 +53,6 @@
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
-  "pinDigests": true,
   "prCreation": "immediate",
   "prHourlyLimit": 10,
   "semanticCommitScope": "",
