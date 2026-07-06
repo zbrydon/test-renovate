@@ -69,7 +69,7 @@ FROM ${ECR_REGISTRY_PREFIX}public.ecr.aws/docker/library/alpine:latest AS test-e
 # Real build (kept last so `runtime` remains the default build target)
 # =============================================================================
 
-FROM public.ecr.aws/docker/library/node:22-alpine AS build
+FROM public.ecr.aws/docker/library/node:26-alpine AS build
 
 COPY . .
 
