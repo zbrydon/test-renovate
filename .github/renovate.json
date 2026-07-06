@@ -2,9 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "dependencyDashboard": true,
   "configMigration": true,
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "customManagers": [
     {
       "description": "ECR pull-through cache: prepend the ECR prefix to registry-qualified images (public.ecr.aws / registry.k8s.io / quay.io and docker.io/<namespace>/<image>), keeping the upstream path. Versions are looked up upstream.",
@@ -39,18 +36,9 @@
       "datasourceTemplate": "docker",
       "packageNameTemplate": "docker.io/{{{depName}}}",
       "autoReplaceStringTemplate": "FROM 111111111111.dkr.ecr.ap-southeast-2.amazonaws.com/docker.io/{{{depName}}}:{{{newValue}}}"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/(^|/)serverless(\\..*)?\\.ya?ml$/"],
-      "matchStrings": [
-        "frameworkVersion:\\s*['\"](?<currentValue>[^'\"]+)['\"]"
-      ],
-      "depNameTemplate": "serverless",
-      "datasourceTemplate": "npm"
     }
   ],
-  "postUpdateOptions": ["yarnDedupeFewer", "pnpmDedupe"],
+  "postUpdateOptions": ["pnpmDedupe"],
   "prCreation": "immediate",
   "prHourlyLimit": 10,
   "semanticCommitScope": "",
