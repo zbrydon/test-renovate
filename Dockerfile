@@ -77,7 +77,7 @@ RUN pnpm install --offline
 RUN pnpm build
 RUN pnpm --filter api --prod --offline deploy api
 
-FROM gcr.io/distroless/nodejs24-debian13@sha256:ef5f3caf80da1630edd1a4df7b307a8f7d4553f8eec1dd29852b76e793593903 AS runtime
+FROM gcr.io/distroless/nodejs24-debian13@sha256:e7b49c7570331548957099e4c53d1b7255605dd20b0c56ee368077c07c1b170b AS runtime
 
 WORKDIR /workdir
 
